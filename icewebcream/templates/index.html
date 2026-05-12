@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Visão do Estoque Atual</h2>
+<ul>
+    {% for item in produtos %}
+    <li>
+        <strong>{{ item['descricao'] }}</strong>:
+        Saldo = {{ item['quantidade'] }} | Mínimo = {{ item['estoque_minimo'] }}
+
+        {% if item['quantidade'] < item['estoque_minimo'] %} <span style="color: red; font-weight: bold;"> (🔴 ATENÇÃO:
+            ABAIXO DO MÍNIMO!)</span>
+            {% else %}
+            <span style="color: green;"> (🟢 Estoque OK)</span>
+            {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

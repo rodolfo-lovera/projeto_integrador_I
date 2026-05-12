@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Registrar Entrada, Saída ou Ajuste de Estoque</h2>
+
+<form method="POST" action="/movimentacao">
+
+    <label>Produto:</label><br>
+    <select name="produto_id" required>
+        <option value="">Selecione o produto...</option>
+        {% for p in produtos %}
+        <option value="{{ p['id'] }}">{{ p['descricao'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label>Tipo de Movimentação:</label><br>
+    <select name="tipo" required>
+        <option value="entrada">Entrada (Chegou mercadoria nova)</option>
+        <option value="saida">Saída (Consumo, perda ou desperdício)</option>
+        <option value="ajuste">Ajuste (Contagem física na prateleira)</option>
+    </select><br><br>
+
+    <label>Quantidade:</label><br>
+    <input type="number" step="0.1" name="quantidade" required><br><br>
+
+    <label>Observação (Opcional):</label><br>
+    <input type="text" name="observacao" placeholder="Ex: Compra da semana, validade vencida..."><br><br>
+
+    <button type="submit">Salvar Movimentação</button>
+</form>
+{% endblock %}
